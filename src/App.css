@@ -20,3 +20,8 @@ input {
     background-color: #aaaaaa;
     border-radius: 5px;
 }
+
+.marked-cell {
+    background-color: blue;
+    border-radius: 5px;
+}
