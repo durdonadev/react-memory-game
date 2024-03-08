@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    const [difficulty, setDifficulty] = useState(2);
+    const [cells, setCells] = useState(Array(4).fill(null));
+
+    const handleOnChange = (e) => {
+        const { value } = e.target;
+        setDifficulty(value);
+        setCells(Array(value ** 2).fill(null));
+    };
+
+    return (
+        <div className="container">
+            <h1>Memory Game</h1>
+            <p>Difficulty: {difficulty}</p>
+            <input
+                type="range"
+                min="2"
+                max="20"
+                step="1"
+                onChange={handleOnChange}
+            />
+            <button>Start Game</button>
+
+            <div
+                className="grid"
+                style={{ gridTemplateColumns: `repeat(${difficulty}, 1fr` }}
+            >
+                {cells.map((cell, idx) => {
+                    return <div key={idx} className="grid__cell"></div>;
+                })}
+            </div>
+        </div>
+    );
 }
-
-export default App;
